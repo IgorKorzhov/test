@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="book_list" th:fragment="book_list">
+    <div th:replace="fragments/alert"></div>
+    <table class="table table-success table-striped">
+        <thead class="table-secondary">
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Год издания</th>
+            <th scope="col">Количество листов</th>
+            <th scope="col">Общее количество книг в библиотеке</th>
+            <th scope="col">Доступное количество книг</th>
+            <th scope="col">Операции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}" th:object="${book}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{genre}"></td>
+            <td th:text="*{getAuthor().getFIO()}"></td>
+            <td th:text="*{yearOfIssue}"></td>
+            <td th:text="*{totalOfSheets}"></td>
+            <td th:text="*{totalOfBooks}"></td>
+            <td th:text="*{totalOfBooksInLibrary}"></td>
+            <td>
+                <a th:href="@{references/books/edit/(pid=*{pid})}" class=" btn btn-warning editBtn">
+                    Edit
+                </a>
+                <a th:href="@{references/books/delete/(pid=*{pid})}" class=" btn btn-danger deliteBtn">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="modal fade" id="addModalBook" tabindex="-1"
+         role="dialog" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="editModalBook" tabindex="-1"
+         role="dialog" aria-hidden="true">
+    </div>
+    <div th:replace="references/books/modal/deleteBook">
+    </div>
+
+
+</div>
+
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Редактирование кнмги</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form th:action="@{references/books/updateBook}" id="edit_book" th:object="${book}" method="post">
+                <input type="hidden" th:field="*{pid}" name="pid" id="edit_book_id">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Название книги</label>
+                    <input type="text" th:field="*{name}" name="name" class="form-control" id="name"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="col-form-label">Жанр</label>
+                    <input name="genre" th:field="*{genre}" class="radio" type="radio" required
+                           th:each="genre : ${T(com.example.library.library.model.Genre).values()}"
+                           th:text="${genre}"
+                           th:value="${genre}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="col-form-label">Автор</label>
+                    <select id="author" class="form-select" size="3" th:field="*{author}" multiple="multiple"
+                            required>
+                        <option th:each="author: ${predefinedAuthor}"
+                                th:value="${{author}}"
+                                th:text="${author.lastName}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="yearOfIssue" class="form-label">Отчество</label>
+                    <input type="text" name="yearOfIssue" th:field="*{yearOfIssue}" class="form-control" id="yearOfIssue" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="totalOfSheets" class="form-label">Количество листов в книге</label>
+                    <input type="password" name="totalOfSheets" th:field="*{totalOfSheets}" class="form-control" id="totalOfSheets" required
+                           >
+                </div>
+
+                <div class="mb-3">
+                    <label for="totalOfBooks" class="form-label">Общее количество книг в библиотеке</label>
+                    <input type="password" name="totalOfBooks" th:field="*{totalOfBooks}" class="form-control" id="totalOfBooks" required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="totalOfBooksInLibrary" class="form-label">Доступное количество книг</label>
+                    <input type="password" name="totalOfBooksInLibrary" th:field="*{totalOfBooksInLibrary}" class="form-control" id="totalOfBooksInLibrary" required
+                    >
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+</html>

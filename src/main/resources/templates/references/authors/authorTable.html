@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="author_list" th:fragment="author_list">
+    <div th:replace="fragments/alert"></div>
+    <table class="table table-success table-striped">
+        <thead class="table-secondary">
+        <tr>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Список книг</th>
+            <th scope="col">Операции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}" th:object="${author}">
+            <td th:text="*{lastName}"></td>
+            <td th:text="*{firstName}"></td>
+            <td th:text="*{middleName}"></td>
+            <td th:text="*{getBooksStr()}"></td>
+            <td>
+                <a th:href="@{references/authors/edit/(pid=*{pid})}" class=" btn btn-warning editBtn">
+                    Edit
+                </a>
+                <a th:href="@{references/authors/delete/(pid=*{pid})}" class=" btn btn-danger deliteBtn">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="modal fade" id="addModalAuthor" tabindex="-1"
+         role="dialog" aria-hidden="true">
+    </div>
+    <div class="modal fade" id="editModalAuthor" tabindex="-1"
+         role="dialog" aria-hidden="true">
+    </div>
+    <div th:replace="references/authors/modal/deleteAuthor">
+    </div>
+
+
+</div>
+
+
+</html>

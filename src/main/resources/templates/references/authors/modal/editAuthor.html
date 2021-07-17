@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Редактирование автора</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form th:action="@{references/authors/updateAuthor}" id="edit_author" th:object="${author}" method="post">
+                <input type="hidden" th:field="*{pid}" name="pid" id="edit_author_id">
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input type="text" th:field="*{lastName}" name="lastName" class="form-control" id="lastName"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Имя</label>
+                    <input type="text" name="firstName" th:field="*{firstName}" class="form-control" id="firstName"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="middleName" class="form-label">Отчество</label>
+                    <input type="text" name="middleName" th:field="*{middleName}" class="form-control" id="middleName">
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="col-form-label">Список книг</label>
+                    <select id="author" class="form-select" size="3" th:field="*{books}" multiple="multiple"
+                            required>
+                        <option th:each="book: ${predefinedBooks}"
+                                th:value="${{book}}"
+                                th:text="${book.name}"></option>
+                    </select>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+</html>
