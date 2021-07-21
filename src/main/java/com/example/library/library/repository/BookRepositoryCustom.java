@@ -7,4 +7,7 @@ import java.util.List;
 public interface BookRepositoryCustom {
 
     List<Book> search(String str);
+
+
+
 }
