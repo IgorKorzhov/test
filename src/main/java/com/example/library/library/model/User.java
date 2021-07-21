@@ -34,7 +34,7 @@ public class User {
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, columnDefinition = "varchar(20) default 'ACTIVE'")
-    private Status status;
+    private Status statusdf;
 
     @Transient
     public String getRolesStr(){
